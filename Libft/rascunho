@@ -1,0 +1,141 @@
+#include <stdio.h>
+
+int	ft_strlen(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
+
+strlcpy()
+       Some systems (the BSDs, Solaris, and others) provide the
+       following function:
+
+           size_t strlcpy(char *dest, const char *src, size_t size);
+
+       This function is similar to strncpy(), but it copies at most
+       size-1 bytes to dest, always adds a terminating null byte, and
+       does not pad the destination with (further) null bytes.  This
+       function fixes some of the problems of strcpy() and strncpy(),
+       but the caller must still handle the possibility of data loss if
+       size is too small.  The return value of the function is the
+       length of src, which allows truncation to be easily detected: if
+       the return value is greater than or equal to size, truncation
+       occurred.  If loss of data matters, the caller must either check
+       the arguments before the call, or test the function return value.
+       strlcpy() is not present in glibc and is not standardized by
+       POSIX, but is available on Linux via the libbsd library.
+
+char	*ft_strncpy(char *dest, char *src, unsigned int n)
+{
+	unsigned int i;
+
+	i = 0;
+	while (i < n && src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	while (i < n)
+	{
+		dest[i] = '\0';
+		i++;
+	}
+	return (dest);
+}
+
+
+isalpha()
+              checks for an alphabetic character; in the standard "C"
+              locale, it is equivalent to (isupper(c) || islower(c)).
+              In some locales, there may be additional characters for
+              which isalpha() is true—letters which are neither
+              uppercase nor lowercase.
+
+int		alpha(char c)
+{
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+	{
+		return (0);
+	}
+	return (1);
+}
+
+int		ft_str_is_alpha(char *str)
+{
+	int i;
+
+	i = 0;
+	if (str[i] == '\0')
+	{
+		return (1);
+	}
+	while (str[i] != '\0')
+	{
+		if (alpha(str[i]) == 0)
+		{
+			i++;
+		}
+		else
+		{
+			return (0);
+		}
+	}
+	return (1);
+}
+
+https://man7.org/linux/man-pages/man3/isspace.3.html
+
+int		ft_strncmp(char *s1, char *s2, unsigned int n)
+{
+	unsigned int	i;
+	int				diferencinha;
+	unsigned int	tamanho;
+
+	i = 0;
+	tamanho = 0;
+	while (s1[i] != '\0')
+	{
+		tamanho++;
+		i++;
+	}
+	i = 0;
+	while (i <= tamanho && i < n)
+	{
+		if (s1[i] != s2[i])
+		{
+			diferencinha = s1[i] - s2[i];
+			return (diferencinha);
+		}
+		i++;
+	}
+	return (0);
+}
+
+char *ft_strncat(char *dest, char *src, unsigned int nb)
+{
+	int i;
+	unsigned int d;
+	
+	i = 0;
+	d = 0;
+	while (dest[i] != '\0')
+	{
+		i++;
+	}
+	while (src[d] != '\0' && d < nb)
+	{
+		dest[i] = src[d];
+		d++;
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+
